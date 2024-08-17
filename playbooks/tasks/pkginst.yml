@@ -1,4 +1,0 @@
-- name: Task to Install the package {{pkg_name}}
-  yum:
-   name: "{{pkg_name}}"
-   state: latest
