@@ -15,5 +15,8 @@
       shell: /bin/bash
       comment: Created by Ansible Playbook
       state: present
+#end of play for useradd
 ...
+
+
 
