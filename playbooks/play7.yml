@@ -1,0 +1,23 @@
+---
+- name: Create an empty directory and create an empty file in that directory
+  hosts: all
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: task to create an empty directory
+     file:
+      path: /sample
+      state: directory
+      owner: root
+      group: root
+      mode: '0755'
+   - name: create an empty file
+     file:
+      path: /sample/efile01.txt
+      state: touch 
+    # state: absent 
+    # when state is absent, the file will be removed.
+      owner: root
+      group: root
+      mode: '0644'
+#End of the paly

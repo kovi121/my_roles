@@ -1,0 +1,17 @@
+---
+- name: play to create a cron job that runs every saturday 8:30pm
+  hosts: all
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: task to create a cron job
+     cron:
+      name: MydfJob
+      minute: 30
+      hour: 20
+      day: "*"
+      month: "*"
+      weekday: "6" #saturday
+      job: "/usr/bin/df -h >>/tmp/df.out"
+    #  state: absent
+...

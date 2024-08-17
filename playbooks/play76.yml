@@ -1,0 +1,14 @@
+- name: Play to demonstrate raw module
+  hosts: sivakumar
+  become: true
+  remote_user: ansible
+  gather_facts: no
+  tasks:
+   - name: Demonstrate raw module
+   #Raw module is used when there is no pythod available in managed node.
+     raw: /usr/bin/vmstat 2 2
+     register: out
+   - name: print the output
+     debug:
+      msg: "{{out.stdout_lines}}"
+...

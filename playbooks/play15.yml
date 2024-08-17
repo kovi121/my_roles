@@ -1,0 +1,17 @@
+---
+- name: Play to demonstrate archive module. ie tar and gzip
+  hosts: 192.168.1.31
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: Task to arcive the given directory
+     archive:
+      path:
+       - /etc/*
+       - /var/*
+       #Archives /etc and /var directories 
+      format: gz
+      #compresses the archive
+      dest: asiarchive.tar.gz #By default it will be store in ansible home directory
+...
+#End of the play.

@@ -1,0 +1,30 @@
+---
+- name: play to demonstrate handler'
+  hosts: all
+  become: true
+  remote_user: ansile
+  vars:
+   pkg_name: httpd
+   src_name: httpd
+   pport: 99
+   web_msg: "hello from ansi !!"
+  tasks:
+  - name: "install {{pkg_name}} in {ansible_hostname}"
+    yum:
+     name: "{{pkg_name}}"
+     state: latest
+    notify: web_started
+  - name: copy the configuration file
+    copy:
+     src: /home/ansible/playbooks/myweb.conf
+     dest: /etc/httpd/conf.d/myweb.conf
+    notify: wed_started
+  - name: create a directory for documents
+    file:
+     path: /myweb
+     state: directory
+  - name: create index.html file
+    template:
+     src: templates/index.j2
+     dest: /my/web/index.html
+     #ownre:root          

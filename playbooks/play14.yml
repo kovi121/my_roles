@@ -1,0 +1,9 @@
+---
+- name: demonstrte module to print something on the screen
+  hosts: localhost
+  tasks:
+   - name: Print some text
+     debug:
+      msg: "Hello there... this is being printed by debug module"
+...
+#End of the play.

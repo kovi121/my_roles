@@ -1,0 +1,15 @@
+---
+- name: demonstrate using fetch module to download a file from remote server
+  hosts: 192.168.1.31
+  remote_user: ansible
+  become: true
+  tasks:
+   - name: fetch /var/log/messages file
+     fetch:
+      src: /var/log/messages
+      dest: /tmp/
+      flat: no
+      #flat: yes ==> this downloads only the file nname
+      #flat: no ==> this creates a directory with hostname
+      #and an  absolute path of the file also downlaoded
+...

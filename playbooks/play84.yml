@@ -1,0 +1,39 @@
+---
+- name: Domostrate a play where as a task is forced to change status
+  hosts: localhost
+  become: true
+  remote_user: ansible
+  tasks:
+   - name: Task1 to print a message
+     debug:
+      msg: This is message in task1
+     changed_when: true
+     notify: handleme
+   - name: Demonstrate flush handler
+     meta: flush_handlers
+#Meta tasks are a special kind of task which can incluence Ansible internal execution or state
+#Meta task can be used anywhere within your playbook.
+#flust_handlers make Ansible run any handler tasks which have thus far been notified
+#Ansible insert these tasks internally at certain points to implicitly trigger handlers run.
+#Handler is processed with notify statement when change occurs in the tasks
+#If No change occurs, handler will be ignored ie handler will not be notified
+   - name: Task2 to print a message
+     debug:
+      msg: This is message in taskw
+     changed_when: true
+     notify: handleme
+#This is second time you are notifying the same handler.
+#however, though you notify handler manytimes, it runs only once.
+#Handlers are invked at the end of all tasks processed
+#They are processed in the same order they appear in the handlers section and
+#not in the order they are notified.
+   - name: Task3 to print a message
+     debug:
+      msg: This is message in taskw
+     changed_when: true
+     notify: handleme
+  handlers:
+   - name: handleme
+     debug:
+      msg: In handler named handleme
+...
